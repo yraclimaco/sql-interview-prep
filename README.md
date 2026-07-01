@@ -13,3 +13,4 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - Can't reference window function alias in same SELECT — wrap in second CTE
 - Chain multiple CTEs with comma under single WITH, not two WITH keywords
 
+| 2 | Snapchat Send vs Open Percentage | Medium | CASE WHEN + SUM pivot, LEFT JOIN, GROUP BY, ROUND | 0 | Jun 27 |
