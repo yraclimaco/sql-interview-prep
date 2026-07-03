@@ -9,6 +9,7 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 2 | Snapchat Send vs Open Percentage | Medium | CASE WHEN + SUM pivot, LEFT JOIN, GROUP BY, ROUND | 0 | Jun 27 |
 | 3 | Walmart User Transactions | Medium | RANK, PARTITION BY, GROUP BY, ORDER BY | 0 | Jun 30 |
 | 4 | Amazon Average Star Rating | Easy | GROUP BY, EXTRACT, AVG, ROUND, ORDER BY | 0 | Jul 1 |
+| 5 | Amazon Highest Grossing Items | Medium | RANK, PARTITION BY, SUM, GROUP BY, WHERE date filter | 2 | Jul 2 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
@@ -21,6 +22,11 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - Missing column in GROUP BY — every column in SELECT that isn't aggregated
   must appear in GROUP BY. Scan SELECT list top to bottom before running
   and ask: is this aggregated? If not, it needs to be in GROUP BY.
+- When totals don't match expected output but structure is correct — check for 
+  a date filter. Problems are often scoped to a specific year/month.
+- Always SUM before RANK when question asks for "top N by total" 
+
+— rank individual rows only when data is already at the right granularity.
 
 ## Concepts Drilled
 - Window functions: LAG, RANK, PARTITION BY, ORDER BY
