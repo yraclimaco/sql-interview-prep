@@ -10,6 +10,7 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 3 | Walmart User Transactions | Medium | RANK, PARTITION BY, GROUP BY, ORDER BY | 0 | Jun 30 |
 | 4 | Amazon Average Star Rating | Easy | GROUP BY, EXTRACT, AVG, ROUND, ORDER BY | 0 | Jul 1 |
 | 5 | Amazon Highest Grossing Items | Medium | RANK, PARTITION BY, SUM, GROUP BY, WHERE date filter | 2 | Jul 2 |
+| 6 | Google Odd and Even Measurements | Medium | ROW_NUMBER, DATE_TRUNC, PARTITION BY, CASE WHEN + SUM pivot, GROUP BY | 0 | Jul 3 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
@@ -35,6 +36,11 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - Integer division fix: multiply by 100.0 not 100
 - GROUP BY vs window functions: GROUP BY collapses rows, window functions keep them
 - EXTRACT for date parts: month, year
+- DATE_TRUNC('day', timestamp) — truncates timestamp to midnight, 
+  use instead of EXTRACT(DAY) when you need full date grouping
+- ROW_NUMBER to rank positions within a group, then % 2 to 
+  separate odd/even positions
+
 
 ## Pre-Run Checklist
 Before hitting run on any query:
