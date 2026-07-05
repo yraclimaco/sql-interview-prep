@@ -11,6 +11,7 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 4 | Amazon Average Star Rating | Easy | GROUP BY, EXTRACT, AVG, ROUND, ORDER BY | 0 | Jul 1 |
 | 5 | Amazon Highest Grossing Items | Medium | RANK, PARTITION BY, SUM, GROUP BY, WHERE date filter | 2 | Jul 2 |
 | 6 | Google Odd and Even Measurements | Medium | ROW_NUMBER, DATE_TRUNC, PARTITION BY, CASE WHEN + SUM pivot, GROUP BY | 0 | Jul 3 |
+| 7 | LinkedIn Top 3 Salary by Department | Medium | DENSE_RANK, PARTITION BY, LEFT JOIN, ORDER BY | 0 | Jul 4 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
