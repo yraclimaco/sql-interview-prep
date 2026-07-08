@@ -27,8 +27,10 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - When totals don't match expected output but structure is correct — check for 
   a date filter. Problems are often scoped to a specific year/month.
 - Always SUM before RANK when question asks for "top N by total" 
-
-— rank individual rows only when data is already at the right granularity.
+- Missing DESC on ORDER BY in window functions — always ask: 
+  do I want highest or lowest first? Default is ascending (lowest first).
+  For top N problems always add DESC.
+- rank individual rows only when data is already at the right granularity.
 
 ## Concepts Drilled
 - Window functions: LAG, RANK, PARTITION BY, ORDER BY
