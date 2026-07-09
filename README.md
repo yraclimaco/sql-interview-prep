@@ -14,6 +14,7 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 7 | LinkedIn Top 3 Salary by Department | Medium | DENSE_RANK, PARTITION BY, LEFT JOIN, ORDER BY | 0 | Jul 4 |
 | 8 | TikTok Signup Activation Rate | Medium | LEFT JOIN, SUM CASE WHEN, COUNT DISTINCT, integer division fix | 0 | Jul 4 |
 | 9 | Amazon Best Selling Product | Medium | ROW_NUMBER, PARTITION BY, ORDER BY DESC, LEFT JOIN, tie-breaking | 1 | Jul 7 |
+| 10 | Amazon User Shopping Sprees | Medium | LAG offset, DISTINCT dedup, date subtraction, consecutive days pattern | 1 | Jul 9 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
@@ -40,6 +41,15 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - DENSE_RANK vs RANK: DENSE_RANK does not skip ranks after ties
 - COUNT DISTINCT for accurate denominators in rate calculations
 - Tie-breaking in window functions: list metrics in priority order, all DESC
+- LAG with offset: LAG(col, 2) looks back 2 rows — use for consecutive 
+  day patterns. Always deduplicate by day first.
+- PostgreSQL date subtraction: date - date returns integer days directly,
+  no DATEDIFF needed.
+
+Consecutive Days Pattern:
+1. DISTINCT to deduplicate by user + day
+2. LAG(date, N-1) to look back N-1 rows
+3. WHERE current_date - lag_date = N-1
 
 ## Pre-Run Checklist
 Before hitting run on any query:
