@@ -15,6 +15,8 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 8 | TikTok Signup Activation Rate | Medium | LEFT JOIN, SUM CASE WHEN, COUNT DISTINCT, integer division fix | 0 | Jul 4 |
 | 9 | Amazon Best Selling Product | Medium | ROW_NUMBER, PARTITION BY, ORDER BY DESC, LEFT JOIN, tie-breaking | 1 | Jul 7 |
 | 10 | Amazon User Shopping Sprees | Medium | LAG offset, DISTINCT dedup, date subtraction, consecutive days pattern | 1 | Jul 9 |
+| 11 | Microsoft Supercloud Customer | Medium | COUNT DISTINCT, LEFT JOIN, GROUP BY, subquery in WHERE | 0 | Jul 9 |
+| 12 | Zomato Swapped Food Delivery | Medium | CASE WHEN, modulo odd/even, subquery MAX, edge case handling | 1 | Jul 11 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
@@ -29,6 +31,8 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - DATE_TRUNC not EXTRACT(DAY) for date grouping — EXTRACT pulls day number only, DATE_TRUNC truncates to midnight of full date.
 - Integer division returns 0 for fractions — multiply by 1.0 or cast to decimal.
 - Denominator in rate calculations must count distinct entities not total rows — duplicate rows from JOINs inflate the count.
+- Edge case handling — always ask: what happens to the last row, first row, or NULL values? Handle boundary conditions with subquery MAX/MIN or COALESCE.
+- Don't overcomplicate with JOINs when a single CTE SELECT works — if you already have the data in a CTE, SELECT from it directly.
 
 ## Concepts Drilled
 - Window functions: LAG, RANK, DENSE_RANK, ROW_NUMBER, PARTITION BY, ORDER BY
@@ -41,12 +45,13 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - DENSE_RANK vs RANK: DENSE_RANK does not skip ranks after ties
 - COUNT DISTINCT for accurate denominators in rate calculations
 - Tie-breaking in window functions: list metrics in priority order, all DESC
-- LAG with offset: LAG(col, 2) looks back 2 rows — use for consecutive 
-  day patterns. Always deduplicate by day first.
-- PostgreSQL date subtraction: date - date returns integer days directly,
-  no DATEDIFF needed.
+- LAG with offset: LAG(col, 2) looks back 2 rows — use for consecutive day patterns. Always deduplicate by day first.
+- PostgreSQL date subtraction: date - date returns integer days directly, no DATEDIFF needed.
+- Modulo for odd/even: order_id % 2 = 1 is odd, % 2 = 0 is even
+- Subquery in WHERE clause: use to dynamically compare against an aggregate instead of hardcoding a value.
+- Subquery MAX for edge cases: (SELECT MAX(col) FROM table) inside CASE WHEN handles boundary conditions dynamically.
 
-Consecutive Days Pattern:
+## Consecutive Days Pattern
 1. DISTINCT to deduplicate by user + day
 2. LAG(date, N-1) to look back N-1 rows
 3. WHERE current_date - lag_date = N-1
@@ -59,3 +64,4 @@ Before hitting run on any query:
 4. Is my denominator counting distinct entities or total rows?
 5. Am I dividing two integers that produce a fraction? If so, multiply by 1.0.
 6. Does my ORDER BY have DESC for top N problems?
+7. Have I handled edge cases — last row, first row, NULLs?
