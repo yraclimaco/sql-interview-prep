@@ -17,6 +17,7 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 10 | Amazon User Shopping Sprees | Medium | LAG offset, DISTINCT dedup, date subtraction, consecutive days pattern | 1 | Jul 9 |
 | 11 | Microsoft Supercloud Customer | Medium | COUNT DISTINCT, LEFT JOIN, GROUP BY, subquery in WHERE | 0 | Jul 9 |
 | 12 | Zomato Swapped Food Delivery | Medium | CASE WHEN, modulo odd/even, subquery MAX, edge case handling | 1 | Jul 11 |
+| 13 | Microsoft Teams Power Users | Easy | COUNT, GROUP BY, WHERE BETWEEN, ORDER BY DESC, LIMIT | 0 | Jul 11 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
