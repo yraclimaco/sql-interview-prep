@@ -17,7 +17,8 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 | 10 | Amazon User Shopping Sprees | Medium | LAG offset, DISTINCT dedup, date subtraction, consecutive days pattern | 1 | Jul 9 |
 | 11 | Microsoft Supercloud Customer | Medium | COUNT DISTINCT, LEFT JOIN, GROUP BY, subquery in WHERE | 0 | Jul 9 |
 | 12 | Zomato Swapped Food Delivery | Medium | CASE WHEN, modulo odd/even, subquery MAX, edge case handling | 1 | Jul 11 |
-| 13 | Microsoft Teams Power Users | Easy | COUNT, GROUP BY, WHERE BETWEEN, ORDER BY DESC, LIMIT | 0 | Jul 11 |
+| 13 | Microsoft Teams Power Users | Easy | COUNT, GROUP BY, WHERE BETWEEN, ORDER BY DESC, LIMIT | 0 | Jul 12 |
+| 14 | Facebook Average Post Hiatus | Easy | MAX/MIN date subtraction, EXTRACT, GROUP BY, HAVING COUNT | 0 | Jul 13 |
 
 ## Mistake Patterns
 - Trailing comma before FROM — scan SELECT list before running
@@ -34,6 +35,8 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - Denominator in rate calculations must count distinct entities not total rows — duplicate rows from JOINs inflate the count.
 - Edge case handling — always ask: what happens to the last row, first row, or NULL values? Handle boundary conditions with subquery MAX/MIN or COALESCE.
 - Don't overcomplicate with JOINs when a single CTE SELECT works — if you already have the data in a CTE, SELECT from it directly.
+- No DATEDIFF in PostgreSQL — subtract dates directly. Cast timestamps to date first: timestamp::date - timestamp::date = integer days. DATEDIFF exists in MySQL, Snowflake, BigQuery but NOT PostgreSQL.
+- HAVING vs WHERE — WHERE filters rows before aggregation, HAVING filters groups after. Use HAVING when filtering on COUNT, SUM, AVG.
 
 ## Concepts Drilled
 - Window functions: LAG, RANK, DENSE_RANK, ROW_NUMBER, PARTITION BY, ORDER BY
@@ -51,6 +54,8 @@ Practicing DataLemur problems daily targeting product analytics internships (Sum
 - Modulo for odd/even: order_id % 2 = 1 is odd, % 2 = 0 is even
 - Subquery in WHERE clause: use to dynamically compare against an aggregate instead of hardcoding a value.
 - Subquery MAX for edge cases: (SELECT MAX(col) FROM table) inside CASE WHEN handles boundary conditions dynamically.
+- HAVING vs WHERE: HAVING filters after aggregation, WHERE filters before.
+- Date syntax by database: PostgreSQL uses date subtraction, BigQuery uses DATE_DIFF, Snowflake uses DATEDIFF, MySQL uses DATEDIFF.
 
 ## Consecutive Days Pattern
 1. DISTINCT to deduplicate by user + day
@@ -66,3 +71,4 @@ Before hitting run on any query:
 5. Am I dividing two integers that produce a fraction? If so, multiply by 1.0.
 6. Does my ORDER BY have DESC for top N problems?
 7. Have I handled edge cases — last row, first row, NULLs?
+8. Am I using DATEDIFF? If so, replace with date subtraction for PostgreSQL.
